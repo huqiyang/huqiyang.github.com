@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huqiyang.github.io/"/>
-  <updated>2017-02-09T07:04:47.044Z</updated>
+  <updated>2017-02-09T09:01:53.590Z</updated>
   <id>http://huqiyang.github.io/</id>
   
   <author>
@@ -14,6 +14,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>利用Hexo和Github搭建个人博客</title>
+    <link href="http://huqiyang.github.io/2017/02/09/%E5%88%A9%E7%94%A8Hexo%E5%92%8CGithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://huqiyang.github.io/2017/02/09/利用Hexo和Github搭建个人博客/</id>
+    <published>2017-02-09T09:00:49.000Z</published>
+    <updated>2017-02-09T09:01:53.590Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一-准备工作"><a href="#一-准备工作" class="headerlink" title="一. 准备工作"></a>一. 准备工作</h2><h5 id="1-安装Git"><a href="#1-安装Git" class="headerlink" title="1. 安装Git"></a>1. <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000" target="_blank" rel="external">安装Git</a></h5><h5 id="2-安装Node-v6-9-5-LTS"><a href="#2-安装Node-v6-9-5-LTS" class="headerlink" title="2. 安装Node v6.9.5 LTS"></a>2. <a href="https://nodejs.org/dist/v6.9.5/node-v6.9.5-x64.msi" target="_blank" rel="external">安装Node v6.9.5 LTS</a></h5><h5 id="3-安装Hexo"><a href="#3-安装Hexo" class="headerlink" title="3. 安装Hexo"></a>3. 安装Hexo</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 使用以下命令安装hexo到全局</div><div class="line">$ npm install -g hexo</div><div class="line"># 然后输入命令`hexo -v`显示hexo的版本号即为安装成功。</div></pre></td></tr></table></figure>
+<h5 id="4-github准备"><a href="#4-github准备" class="headerlink" title="4. github准备"></a>4. github准备</h5><p>博客是在<a href="https://github.com/" target="_blank" rel="external">github</a>上托管维护的，所以当然需要一个github的账号了。然后创建一个名为huqiyang.github.io<br>的仓库。<br>其中<code>huqiyang</code>是我的账户名，下文同理。<br>除此之外，相信大多数人都知道，要想使用<a href="http://lib.csdn.net/base/git" target="_blank" rel="external">Git</a>命令来和github进行提交部署等操作，需要进行一些配置，大概就是下面一些命令，如不明白请自行搜索。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git config --global user.email xxx@163.com</div><div class="line">git config --global user.name xxx</div><div class="line">ssh-keygen -t rsa -C xxx@163.com(邮箱地址)      // 生成ssh</div><div class="line"># 找到.ssh文件夹打开，用记事本打开id_rsa.pub，即公钥ssh串</div><div class="line"># 登陆github，settings － SSH keys  － add ssh keys（把公钥ssh串全部添加进去即可）</div></pre></td></tr></table></figure></p>
+<h2 id="二-开始搭建博客"><a href="#二-开始搭建博客" class="headerlink" title="二. 开始搭建博客"></a>二. 开始搭建博客</h2><p>在某个地方新建一个项目文件夹（比如Blog），然后进入Blog目录，以下所有的命令行操作都是在这个文件夹下进行的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"># 初始化</div><div class="line">$ hexo init</div><div class="line"># 生成静态页面，初始化完成之后，就已经生成一篇“hello word”的文章了，现在执行以下命令把文章编译为静态页面</div><div class="line">$ hexo generate</div><div class="line"># 本地启动</div><div class="line"># 在浏览器中输入http://localhost:4000/即可看到默认生成的页面效果</div><div class="line"></div><div class="line"># 新建文章postname，该操作会在Blog/source/_posts内新建一个md文件</div><div class="line">$ hexo new &quot;postname&quot; </div><div class="line"># 设置标签等属性，下面就写markdown文档</div><div class="line">---</div><div class="line">title: test</div><div class="line">date: 2017-02-09 14:59:35</div><div class="line">tags: Node.js</div><div class="line">---</div></pre></td></tr></table></figure></p>
+<h2 id="三-更换主题"><a href="#三-更换主题" class="headerlink" title="三. 更换主题"></a>三. 更换主题</h2><ul>
+<li>更多主题参看 <a href="https://hexo.io/themes/" target="_blank" rel="external">Hexo Themes</a> 或者直接在Github上搜索</li>
+<li>我因为不喜欢NexT的风格而选择了 indigo <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank" rel="external">一个Material Design风格的Hexo主题</a></li>
+</ul>
+<h4 id="clone主题代码-Indigo主题说明文档"><a href="#clone主题代码-Indigo主题说明文档" class="headerlink" title="clone主题代码 Indigo主题说明文档"></a>clone主题代码 <a href="https://github.com/yscoder/hexo-theme-indigo/wiki" target="_blank" rel="external">Indigo主题说明文档</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"># 在目录下执行下面的命令clone主题代码</div><div class="line">git clone https://github.com/yscoder/hexo-theme-indigo.git themes/indigo</div><div class="line"></div><div class="line"># 安装依赖</div><div class="line"># Less 主题默认使用 less 作为 css 预处理工具。</div><div class="line">$ npm install hexo-renderer-less --save</div><div class="line"></div><div class="line"># Feed 用于生成 rss。</div><div class="line">$ npm install hexo-generator-feed --save</div><div class="line"></div><div class="line"># Json-content 用于生成静态站点数据，用作站内搜索的数据源。</div><div class="line">$ npm install hexo-generator-json-content --save</div><div class="line"></div><div class="line"># QRCode 用于生成微信分享二维码。</div><div class="line">$ npm install hexo-helper-qrcode --save</div></pre></td></tr></table></figure>
+<h2 id="四-部署到Github"><a href="#四-部署到Github" class="headerlink" title="四. 部署到Github"></a>四. 部署到Github</h2><ul>
+<li><p>部署之前先修改Blog/_config.yml文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">    type: git</div><div class="line">    repository: https://github.com/huqiyang/huqiyang.github.com.git</div><div class="line">    branch: master</div></pre></td></tr></table></figure>
+</li>
+<li><p>再输入以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git--save # 如果报错就安装这个</div><div class="line">$ hexo deploy</div><div class="line"># 文件生成后立即部署网站</div><div class="line">$ hexo g -d</div></pre></td></tr></table></figure>
+</li>
+<li><p><a href="http://huqiyang.github.io/">初步成果</a></p>
+</li>
+</ul>
+<h2 id="参考网站"><a href="#参考网站" class="headerlink" title="参考网站"></a>参考网站</h2><p><a href="http://blog.csdn.net/scythe666/article/details/51956821" target="_blank" rel="external">hexo VS jekyll</a><br><a href="https://github.com/yscoder/hexo-theme-indigo/wiki" target="_blank" rel="external">indigo 主题</a><br><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">Hexo 文档</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;一-准备工作&quot;&gt;&lt;a href=&quot;#一-准备工作&quot; class=&quot;headerlink&quot; title=&quot;一. 准备工作&quot;&gt;&lt;/a&gt;一. 准备工作&lt;/h2&gt;&lt;h5 id=&quot;1-安装Git&quot;&gt;&lt;a href=&quot;#1-安装Git&quot; class=&quot;headerlink&quot; 
+    
+    </summary>
+    
+    
+      <category term="Hexo" scheme="http://huqiyang.github.io/tags/Hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>test</title>
