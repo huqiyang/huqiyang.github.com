@@ -20,19 +20,16 @@
     
     
     <meta name="keywords" content="Node.js">
-    <meta name="description" content="###socket.io系统api
-###1. 服务端1234567891011121314io.on(&amp;apos;connection&amp;apos;,function(socket));监听客户端连接,回调函数会传递本次连接的socketio.sockets.emit(&amp;apos;String&amp;apos;,data);给所有客户端广播消息io.sockets.socket(socketid).em">
+    <meta name="description" content="socket.io系统api1. 服务端1234567891011121314io.on(&amp;apos;connection&amp;apos;,function(socket));监听客户端连接,回调函数会传递本次连接的socketio.sockets.emit(&amp;apos;String&amp;apos;,data);给所有客户端广播消息io.sockets.socket(socketid).emit(&amp;apo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网页聊天室之Socket.io 的学习">
 <meta property="og:url" content="http://huqiyang.github.io/2016/09/30/网页聊天室之Socket-io-的学习/index.html">
 <meta property="og:site_name" content="Huqiyang's Blog">
-<meta property="og:description" content="###socket.io系统api
-###1. 服务端1234567891011121314io.on(&amp;apos;connection&amp;apos;,function(socket));监听客户端连接,回调函数会传递本次连接的socketio.sockets.emit(&amp;apos;String&amp;apos;,data);给所有客户端广播消息io.sockets.socket(socketid).em">
-<meta property="og:updated_time" content="2017-02-18T13:28:47.483Z">
+<meta property="og:description" content="socket.io系统api1. 服务端1234567891011121314io.on(&amp;apos;connection&amp;apos;,function(socket));监听客户端连接,回调函数会传递本次连接的socketio.sockets.emit(&amp;apos;String&amp;apos;,data);给所有客户端广播消息io.sockets.socket(socketid).emit(&amp;apo">
+<meta property="og:updated_time" content="2017-02-18T13:31:54.968Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网页聊天室之Socket.io 的学习">
-<meta name="twitter:description" content="###socket.io系统api
-###1. 服务端1234567891011121314io.on(&amp;apos;connection&amp;apos;,function(socket));监听客户端连接,回调函数会传递本次连接的socketio.sockets.emit(&amp;apos;String&amp;apos;,data);给所有客户端广播消息io.sockets.socket(socketid).em">
+<meta name="twitter:description" content="socket.io系统api1. 服务端1234567891011121314io.on(&amp;apos;connection&amp;apos;,function(socket));监听客户端连接,回调函数会传递本次连接的socketio.sockets.emit(&amp;apos;String&amp;apos;,data);给所有客户端广播消息io.sockets.socket(socketid).emit(&amp;apo">
     
         <link rel="alternative" href="/atom.xml" title="Huqiyang&#39;s Blog" type="application/atom+xml">
     
@@ -166,6 +163,13 @@
 
 <div class="container body-wrap">
     
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#socket-io系统api"><span class="post-toc-number">1.</span> <span class="post-toc-text">socket.io系统api</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-服务端"><span class="post-toc-number">2.</span> <span class="post-toc-text">1. 服务端</span></a></li></ol>
+        </nav>
+    </aside>
+    
 <article id="post-网页聊天室之Socket-io-的学习"
   class="post-article article-type-post fade" itemprop="blogPost">
 
@@ -189,8 +193,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>###socket.io系统api</p>
-<p>###1. 服务端<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">io.on(&apos;connection&apos;,function(socket));</div><div class="line">监听客户端连接,回调函数会传递本次连接的socket</div><div class="line"></div><div class="line">io.sockets.emit(&apos;String&apos;,data);</div><div class="line">给所有客户端广播消息</div><div class="line"></div><div class="line">io.sockets.socket(socketid).emit(&apos;String&apos;, data);</div><div class="line">给指定的客户端发送消息</div><div class="line"></div><div class="line">socket.on(&apos;String&apos;,function(data));</div><div class="line">监听客户端发送的信息</div><div class="line"></div><div class="line">socket.emit(&apos;String&apos;, data);</div><div class="line">给该socket的客户端发送消息</div></pre></td></tr></table></figure></p>
+            <h3 id="socket-io系统api"><a href="#socket-io系统api" class="headerlink" title="socket.io系统api"></a>socket.io系统api</h3><h3 id="1-服务端"><a href="#1-服务端" class="headerlink" title="1. 服务端"></a>1. 服务端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">io.on(&apos;connection&apos;,function(socket));</div><div class="line">监听客户端连接,回调函数会传递本次连接的socket</div><div class="line"></div><div class="line">io.sockets.emit(&apos;String&apos;,data);</div><div class="line">给所有客户端广播消息</div><div class="line"></div><div class="line">io.sockets.socket(socketid).emit(&apos;String&apos;, data);</div><div class="line">给指定的客户端发送消息</div><div class="line"></div><div class="line">socket.on(&apos;String&apos;,function(data));</div><div class="line">监听客户端发送的信息</div><div class="line"></div><div class="line">socket.emit(&apos;String&apos;, data);</div><div class="line">给该socket的客户端发送消息</div></pre></td></tr></table></figure>
 <p><strong>广播消息</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//给除了自己以外的客户端广播消息</div><div class="line">socket.broadcast.emit(&quot;msg&quot;,&#123;data:&quot;hello,everyone&quot;&#125;); </div><div class="line"></div><div class="line">//给所有客户端广播消息</div><div class="line">io.sockets.emit(&quot;msg&quot;,&#123;data:&quot;hello,all&quot;&#125;);</div></pre></td></tr></table></figure></p>
 <p><strong>分组</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">socket.on(&apos;group1&apos;, function (data) &#123;</div><div class="line">        socket.join(&apos;group1&apos;);</div><div class="line">&#125;);</div><div class="line">socket.on(&apos;group2&apos;,function(data)&#123;</div><div class="line">        socket.join(&apos;group2&apos;);</div><div class="line"> &#125;);</div></pre></td></tr></table></figure></p>
 <p>客户端发送<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">socket.emit(&apos;group1&apos;)，就可以加入group1分组；</div><div class="line">socket.emit(&apos;group2&apos;)，就可以加入group2分组；</div></pre></td></tr></table></figure></p>
@@ -222,7 +225,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-02-18T13:28:47.483Z" itemprop="dateUpdated">2017年2月18日 21:28</time>
+    最后更新时间：<time datetime="2017-02-18T13:31:54.968Z" itemprop="dateUpdated">2017年2月18日 21:31</time>
 </span><br>
 
 
