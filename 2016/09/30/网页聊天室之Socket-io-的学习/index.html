@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>网页聊天室之Socket.io 的学习 | Huqiyang&#39;s Blog | 菜鸟成长日记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Node.js">
+    <meta name="description" content="###socket.io系统api
+###1. 服务端1234567891011121314io.on(&amp;apos;connection&amp;apos;,function(socket));监听客户端连接,回调函数会传递本次连接的socketio.sockets.emit(&amp;apos;String&amp;apos;,data);给所有客户端广播消息io.sockets.socket(socketid).em">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网页聊天室之Socket.io 的学习">
+<meta property="og:url" content="http://huqiyang.github.io/2016/09/30/网页聊天室之Socket-io-的学习/index.html">
+<meta property="og:site_name" content="Huqiyang's Blog">
+<meta property="og:description" content="###socket.io系统api
+###1. 服务端1234567891011121314io.on(&amp;apos;connection&amp;apos;,function(socket));监听客户端连接,回调函数会传递本次连接的socketio.sockets.emit(&amp;apos;String&amp;apos;,data);给所有客户端广播消息io.sockets.socket(socketid).em">
+<meta property="og:updated_time" content="2017-02-18T13:28:47.483Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网页聊天室之Socket.io 的学习">
+<meta name="twitter:description" content="###socket.io系统api
+###1. 服务端1234567891011121314io.on(&amp;apos;connection&amp;apos;,function(socket));监听客户端连接,回调函数会传递本次连接的socketio.sockets.emit(&amp;apos;String&amp;apos;,data);给所有客户端广播消息io.sockets.socket(socketid).em">
+    
+        <link rel="alternative" href="/atom.xml" title="Huqiyang&#39;s Blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.7">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">胡麒阳</h5>
+          <a href="mailto:huqiyang0124@163.com" title="huqiyang0124@163.com" class="mail">huqiyang0124@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/作品展示"  >
+                <i class="icon icon-lg icon-star"></i>
+                作品展示
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/huqiyang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.jianshu.com/u/40909ea33e50" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                简书
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">网页聊天室之Socket.io 的学习</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">网页聊天室之Socket.io 的学习</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-09-30T08:47:10.000Z" itemprop="datePublished" class="page-time">
+  2016-09-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Node-js学习及实践/">Node.js学习及实践</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-网页聊天室之Socket-io-的学习"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">网页聊天室之Socket.io 的学习</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年09月30日 16:47" datetime="2016-09-30T08:47:10.000Z"  itemprop="datePublished">2016-09-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Node-js学习及实践/">Node.js学习及实践</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>###socket.io系统api</p>
+<p>###1. 服务端<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">io.on(&apos;connection&apos;,function(socket));</div><div class="line">监听客户端连接,回调函数会传递本次连接的socket</div><div class="line"></div><div class="line">io.sockets.emit(&apos;String&apos;,data);</div><div class="line">给所有客户端广播消息</div><div class="line"></div><div class="line">io.sockets.socket(socketid).emit(&apos;String&apos;, data);</div><div class="line">给指定的客户端发送消息</div><div class="line"></div><div class="line">socket.on(&apos;String&apos;,function(data));</div><div class="line">监听客户端发送的信息</div><div class="line"></div><div class="line">socket.emit(&apos;String&apos;, data);</div><div class="line">给该socket的客户端发送消息</div></pre></td></tr></table></figure></p>
+<p><strong>广播消息</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//给除了自己以外的客户端广播消息</div><div class="line">socket.broadcast.emit(&quot;msg&quot;,&#123;data:&quot;hello,everyone&quot;&#125;); </div><div class="line"></div><div class="line">//给所有客户端广播消息</div><div class="line">io.sockets.emit(&quot;msg&quot;,&#123;data:&quot;hello,all&quot;&#125;);</div></pre></td></tr></table></figure></p>
+<p><strong>分组</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">socket.on(&apos;group1&apos;, function (data) &#123;</div><div class="line">        socket.join(&apos;group1&apos;);</div><div class="line">&#125;);</div><div class="line">socket.on(&apos;group2&apos;,function(data)&#123;</div><div class="line">        socket.join(&apos;group2&apos;);</div><div class="line"> &#125;);</div></pre></td></tr></table></figure></p>
+<p>客户端发送<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">socket.emit(&apos;group1&apos;)，就可以加入group1分组；</div><div class="line">socket.emit(&apos;group2&apos;)，就可以加入group2分组；</div></pre></td></tr></table></figure></p>
+<p><strong>踢出分组</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">socket.leave(data.room);</div></pre></td></tr></table></figure></p>
+<p><strong>对分组中的用户发送信息</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//不包括自己</div><div class="line">socket.broadcast.to(&apos;group1&apos;).emit(&apos;event_name&apos;, data);</div><div class="line">//包括自己</div><div class="line">io.sockets.in(&apos;group1&apos;).emit(&apos;event_name&apos;, data);</div></pre></td></tr></table></figure></p>
+<p>broadcast方法允许当前socket client不在该分组内<br><strong>获取连接的客户端socket </strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">io.sockets.clients().forEach(function (socket) &#123;</div><div class="line">    //.....</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p><strong>获取分组信息</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//获取所有房间（分组）信息</div><div class="line">io.sockets.manager.rooms</div><div class="line"></div><div class="line">//来获取此socketid进入的房间信息</div><div class="line">io.sockets.manager.roomClients[socket.id]</div><div class="line"></div><div class="line">//获取particular room中的客户端，返回所有在此房间的socket实例</div><div class="line">io.sockets.clients(&apos;particular room&apos;)</div></pre></td></tr></table></figure></p>
+<p><strong>另一种分组方式</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">io.of(&apos;/some&apos;).on(&apos;connection&apos;, function (socket) &#123;</div><div class="line">    socket.on(&apos;test&apos;, function (data) &#123;</div><div class="line">        socket.broadcast.emit(&apos;event_name&apos;,&#123;&#125;);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>客户端<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var socket = io.connect(&apos;ws://103.31.201.154:5555/some&apos;)</div><div class="line">socket.on(&apos;even_name&apos;,function(data)&#123;</div><div class="line">   console.log(data);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>客户端都链接到ws://103.31.201.154:5555 但是服务端可以通过io.of(‘/some’)将其过滤出来。</p>
+<p>另外，Socket.IO提供了4个配置的API：io.configure, io.set, io.enable, io.disable。其中io.set对单项进行设置，io.enable和io.disable用于单项设置布尔型的配置。io.configure 可以让你对不同的生产环境（如devlopment，test等等）配置不同的参数。</p>
+</blockquote>
+<p>###2. 客户端<br><strong>建立一个socket连接</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var socket = io(&quot;ws://103.31.201.154:5555&quot;);</div></pre></td></tr></table></figure></p>
+<p><strong>监听服务消息</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">socket.on(&apos;msg&apos;,function(data)&#123;</div><div class="line">    socket.emit(&apos;msg&apos;, &#123;rp:&quot;fine,thank you&quot;&#125;); //向服务器发送消息</div><div class="line">    console.log(data);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>socket.on(“String”,function(data)) 监听服务端发送的消息 Sting参数与服务端emit第一个参数相同</p>
+</blockquote>
+<p><strong>监听socket断开与重连</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">socket.on(&apos;disconnect&apos;, function() &#123;</div><div class="line">    console.log(&quot;与服务其断开&quot;);</div><div class="line">&#125;);</div><div class="line">socket.on(&apos;reconnect&apos;, function() &#123;</div><div class="line">    console.log(&quot;重新连接到服务器&quot;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>客户端socket.on()监听的事件：</p>
+<p>connect：连接成功<br>connecting：正在连接<br>disconnect：断开连接<br>connect_failed：连接失败<br>error：错误发生，并且无法被其他事件类型所处理<br>message：同服务器端message事件<br>anything：同服务器端anything事件<br>reconnect_failed：重连失败<br>reconnect：成功重连<br>reconnecting：正在重连<br>当 第一次连接时，事件触发顺序为：connecting-&gt;connect；当失去连接时，事件触发顺序 为：disconnect-&gt;reconnecting（可能进行多 次）-&gt;connecting-&gt;reconnect-&gt;connect。</p>
+</blockquote>
+<p>摘自：<a href="http://www.cnblogs.com/xiezhengcai/p/3956401.html" target="_blank" rel="external">http://www.cnblogs.com/xiezhengcai/p/3956401.html</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-02-18T13:28:47.483Z" itemprop="dateUpdated">2017年2月18日 21:28</time>
+</span><br>
+
+
+        转载请注明出处：<a href="/2016/09/30/网页聊天室之Socket-io-的学习/" target="_blank" rel="external">http://huqiyang.github.io/2016/09/30/网页聊天室之Socket-io-的学习/</a>
+    </div>
+    <footer>
+        <a href="http://huqiyang.github.io">
+            <img src="/img/avatar.jpg" alt="胡麒阳">
+            胡麒阳
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://huqiyang.github.io/2016/09/30/网页聊天室之Socket-io-的学习/&title=《网页聊天室之Socket.io 的学习》 — Huqiyang's Blog&pic=http://huqiyang.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://huqiyang.github.io/2016/09/30/网页聊天室之Socket-io-的学习/&title=《网页聊天室之Socket.io 的学习》 — Huqiyang's Blog&source=前端副本打怪升级中..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://huqiyang.github.io/2016/09/30/网页聊天室之Socket-io-的学习/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《网页聊天室之Socket.io 的学习》 — Huqiyang's Blog&url=http://huqiyang.github.io/2016/09/30/网页聊天室之Socket-io-的学习/&via=http://huqiyang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://huqiyang.github.io/2016/09/30/网页聊天室之Socket-io-的学习/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/02/09/hello-world/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Hello World</h4>
+      </a>
+    </div>
+  
+
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="网页聊天室之Socket-io-的学习" data-title="网页聊天室之Socket.io 的学习" data-url="http://huqiyang.github.io/2016/09/30/网页聊天室之Socket-io-的学习/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'huqiyang', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.7');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃辣条~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Huqiyang's Blog &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://huqiyang.github.io/2016/09/30/网页聊天室之Socket-io-的学习/&title=《网页聊天室之Socket.io 的学习》 — Huqiyang's Blog&pic=http://huqiyang.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://huqiyang.github.io/2016/09/30/网页聊天室之Socket-io-的学习/&title=《网页聊天室之Socket.io 的学习》 — Huqiyang's Blog&source=前端副本打怪升级中..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://huqiyang.github.io/2016/09/30/网页聊天室之Socket-io-的学习/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《网页聊天室之Socket.io 的学习》 — Huqiyang's Blog&url=http://huqiyang.github.io/2016/09/30/网页聊天室之Socket-io-的学习/&via=http://huqiyang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://huqiyang.github.io/2016/09/30/网页聊天室之Socket-io-的学习/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvklEQVR42u3awW4bMQwE0Pz/T6dATwVab2ZIKU6BtycjgNd8OkjMUB8f8fP5+/nz86u//P3M3vb8rcMPHh4e3qj05+JelZsX+gx+ruf5bV8sKB4eHt41Xr59v0LONu7P4HlVT3R44OHh4b2VN2ttk2MmWSA8PDy8/5eX4JNDpW3c8fDw8H4aL29nN/HEbAm+KWvBw8PD62ZS9QDsvZ+vz/fw8PDwFhHqLCZIjoTZgVFUi4eHh3eBl7ezSTj7XFD7zrZRLv5jwMPDw1vz2mC0jVOff3gDKBYRDw8P7xAviWLz7bttstuWPY968fDw8L6TN9vQ8/FYvt3nS/nyuMLDw8O7xttg8mF/ftGqvbjwRcqCh4eHd5TXjp3arX9W9CyujVJqPDw8vKO8fRudBwenmvhkOfDw8PBu8JJR1o2yZm8eHjB4eHh4h3h5lJAPrtrmOw8s6rADDw8P7wJvNnDaBKz5pj+LgP9RFR4eHt5R3nOhsxgiv3rVsuvjCg8PD+8CLx8s5QfDZoFyQB6U4OHh4Z3l7QOFti3eN+VFk42Hh4d3gdfGrLMx2OYgyUdxL5cDDw8P7yhv30a3cUMeWOzbcTw8PLx7vM01qSjniOOJWVj8xc0IPDw8vAu8/VBqdnVgNu4qlhIPDw/vAq/doO8FvjciCTw8PLwbvOQH8nZ2H93mi7ia7+Hh4eEd5SWhQHsRahPm5pcSoskeHh4e3prXhgLtFp+32kWh5eUGPDw8vLO82YirvUCQt9r5EkcRCR4eHt4F3iwgSBrovC1uF+4YCQ8PD2/Bm5XVBgRtONseOVHigoeHh3eU1w6xNuHCLMYdDtvw8PDw3srLx1pJcDAbjw3zaTw8PLy38tqmuc1F2uU71lLj4eHhja5e7bf+WWs+a6ajX8HDw8O7wDs1AMuvTLXjtGSq9bF58PDw8FLeL82BQQVgWbloAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.7"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.7" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
